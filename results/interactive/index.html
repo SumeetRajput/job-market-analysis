@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Job Market Analysis &mdash; Interactive Visualisations</title>
+<style>
+  body { font-family: "Segoe UI", Helvetica, Arial, sans-serif; max-width: 860px;
+         margin: 56px auto; padding: 0 24px; color: #1c2733; line-height: 1.55; }
+  h1 { margin: 0 0 4px; font-size: 30px; color: #1a3a5c; }
+  .sub { color: #667; margin-bottom: 28px; font-size: 14.5px; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { margin: 8px 0; }
+  .row { display: grid; grid-template-columns: 78px 1fr; gap: 3px 15px;
+          padding: 13px 18px; background: #f6f8fa; border-radius: 8px;
+          text-decoration: none; color: inherit; border: 1px solid #e2e8ee; }
+  a.row { transition: background .12s, border-color .12s; }
+  a.row:hover { background: #eaf1f8; border-color: #b9cde0; }
+  .ext { background: #fafbfc; border-style: dashed; opacity: .85; }
+  .tag { grid-row: 1 / span 2; align-self: center; font-size: 11.5px;
+          font-weight: 700; color: #fff; background: #1a3a5c; text-align: center;
+          padding: 5px 0; border-radius: 5px; letter-spacing: .3px; }
+  .ext-tag { background: #8b9aa8; }
+  .name { font-weight: 600; font-size: 15.5px; color: #1a3a5c; }
+  .ext .name { color: #5a6470; }
+  .desc { font-size: 13px; color: #5a6470; }
+  .legend { margin: 18px 0 0; font-size: 12.5px; color: #7a848f; }
+  .note { margin-top: 26px; padding: 15px 18px; background: #fff8e6;
+           border-left: 4px solid #f0ad4e; font-size: 13.5px; border-radius: 0 6px 6px 0; }
+</style></head><body>
+  <h1>Job Market Analysis</h1>
+  <p class="sub">Interactive visualisations &middot; 244,827 Upwork postings &middot; February&ndash;March 2024</p>
+  <ul>
+      <li>
+        <a class="row" href="task1_keywords_hourly.html" target="_blank">
+          <span class="tag">Task 1</span>
+          <span class="name">Keyword Pay Premiums — Hourly</span>
+          <span class="desc">Which title keywords command higher or lower hourly rates</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="task1_keywords_fixed.html" target="_blank">
+          <span class="tag">Task 1</span>
+          <span class="name">Keyword Pay Premiums — Fixed</span>
+          <span class="desc">The same analysis on fixed-price project budgets</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="task2_category_treemap.html" target="_blank">
+          <span class="tag">Task 2</span>
+          <span class="name">Category Treemap</span>
+          <span class="desc">Derived categories sized by volume, split by classification confidence</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="task3_timeseries.html" target="_blank">
+          <span class="tag">Task 3</span>
+          <span class="name">Posting Volume Over Time</span>
+          <span class="desc">Raw vs cleaned daily volume, showing the backfill artifact</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="task3_seasonality.html" target="_blank">
+          <span class="tag">Task 3</span>
+          <span class="name">Weekly Seasonality</span>
+          <span class="desc">Distribution of daily postings by weekday</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="task4_rate_map.html" target="_blank">
+          <span class="tag">Task 4</span>
+          <span class="name">Hourly Rate World Map</span>
+          <span class="desc">Interactive choropleth of median rate by client country</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="task4_rate_bars.html" target="_blank">
+          <span class="tag">Task 4</span>
+          <span class="name">Rates vs Evidence Base</span>
+          <span class="desc">Median rate paired with posting volume per country</span>
+        </a>
+      </li>
+      <li>
+        <div class="row ext">
+          <span class="tag ext-tag">Task 5</span>
+          <span class="name">Recommendation Engine</span>
+          <span class="desc">Delivered as a REST API (api.py, flask_api.py) and the dashboard search page</span>
+        </div>
+      </li>
+      <li>
+        <div class="row ext">
+          <span class="tag ext-tag">Task 6</span>
+          <span class="name">Market Dynamics Dashboard</span>
+          <span class="desc">Delivered as the six-page Streamlit app (dashboard.py)</span>
+        </div>
+      </li>
+      <li>
+        <div class="row ext">
+          <span class="tag ext-tag">Task 7</span>
+          <span class="name">Remote Work Landscape</span>
+          <span class="desc">Delivered as a written analysis in section 9 of the PDF report</span>
+        </div>
+      </li>
+      <li>
+        <a class="row" href="task8_forecast.html" target="_blank">
+          <span class="tag">Task 8</span>
+          <span class="name">14-Day Volume Forecast</span>
+          <span class="desc">Projection with 95% empirical prediction intervals</span>
+        </a>
+      </li>
+  </ul>
+  <p class="legend">Solid rows open an interactive chart. Dashed rows are project
+     deliverables whose output is not a chart &mdash; they are listed so this index
+     maps the full set of eight tasks.</p>
+  <div class="note">
+    <strong>Reading these charts:</strong> country refers to the <em>client's</em>
+    location, not the freelancer's. Hourly rates and fixed budgets are never
+    averaged together &mdash; they are incompatible units. All time-series views
+    exclude scraper backfill, the 15 February collection outage and the truncated
+    final day.
+  </div>
+</body></html>

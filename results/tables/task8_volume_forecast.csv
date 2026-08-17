@@ -1,0 +1,15 @@
+date,day,forecast,lower_95,upper_95,horizon_days,confidence
+2024-03-24,Sunday,4660,4426,4893,1,moderate
+2024-03-25,Monday,6777,6447,7107,2,moderate
+2024-03-26,Tuesday,6875,6470,7280,3,moderate
+2024-03-27,Wednesday,6889,6422,7357,4,moderate
+2024-03-28,Thursday,6855,6332,7377,5,moderate
+2024-03-29,Friday,6628,6056,7200,6,moderate
+2024-03-30,Saturday,4823,4205,5441,7,moderate
+2024-03-31,Sunday,4657,3996,5317,8,low
+2024-04-01,Monday,6726,6025,7426,9,low
+2024-04-02,Tuesday,6824,6085,7563,10,low
+2024-04-03,Wednesday,6844,6069,7619,11,low
+2024-04-04,Thursday,6800,5991,7610,12,low
+2024-04-05,Friday,6584,5741,7426,13,low
+2024-04-06,Saturday,4822,3948,5696,14,low

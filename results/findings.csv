@@ -1,0 +1,7 @@
+task,finding
+Task 1,"[hourly] Premium keyword 'attorney' = 105 $/hr; discount keyword 'philippines' = 4 $/hr (26.2x spread, FDR-significant)."
+Task 1,"[fixed] Premium keyword 'ticket' = 1,000 $/project; discount keyword 'quiz' = 5 $/project (200.0x spread, FDR-significant)."
+Task 4,Client budget spread: Vietnam $27.50/hr vs South Korea $10.00/hr (2.8x).
+Task 5,"Recommender precision@10 = 0.638 vs random 0.080 (8.0x lift), MRR = 0.757."
+Task 7,"Remote demand is concentrated (HHI 0.192, top-5 = 66%), operates 24h (peak/trough 1.6x), and splits 29% technical / 28% creative."
+Task 8,"14-day volume forecast averages 6,215/day (+2.2% vs last week). Only 2/22 category trends are statistically reliable."

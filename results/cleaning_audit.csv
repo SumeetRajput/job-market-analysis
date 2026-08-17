@@ -1,0 +1,14 @@
+step,detail,rows_affected
+load,"Raw rows read: 244,828",244828
+dedupe,Duplicate links removed (natural key = link): 0,0
+drop_untitled,Dropped for null title (unanalysable): 1,1
+parse_dates,Unparseable timestamps dropped: 0,0
+flag_backfill,"Rows before 2024-02-13 flagged as scraper backfill: 283 rows over 48 days vs ~5,960/day after. Excluding these is mandatory for any time-series task.",283
+flag_ts_reliable,"Rows usable for daily counts: 240,548 (excludes backfill, truncated final day, 2024-02-15 outage)",4279
+normalise_titles,"HTML entities decoded, emoji stripped, unicode NFKC-normalised. Titles containing HTML entities before cleaning: 10,130",10130
+normalise_country,"HTML entities decoded (e.g. 'Cote d&#039;Ivoire'). Nulls mapped to 'Unknown' rather than dropped: 5,076",5076
+group_rare_countries,139 countries with <200 postings bucketed. Original retained in `country`; rate statistics must use `country_grouped` to stay stable.,5214
+flag_pay_outliers,"Hourly midpoints outside $3-$250: 311. Fixed budgets outside $5-$50,000: 176. Flagged not dropped; medians reported throughout (budget mean $911 vs median $100).",487
+flag_pay_disclosure,"Postings with no pay information: 38,514 (15.7%). All are hourly posts with an unspecified rate. NOT imputed - treated as the informative category 'rate undisclosed'.",38514
+derive_category,"Two-tier taxonomy applied (dataset has no category column). Tier 1 specific-phrase: 156,342 (63.9%). Tier 2 generic-token: 64,339 (26.3%). Unmatched: 24,146 (9.9%). Tier stored per row in `category_tier` so confidence is auditable.",220681
+finalise,"Clean dataset: 244,827 rows x 33 columns",244827

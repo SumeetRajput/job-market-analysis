@@ -1,0 +1,100 @@
+# =============================================================================
+#  JOB MARKET ANALYSIS - SERVICE ORCHESTRATION
+# =============================================================================
+#
+#  Three services, one shared volume:
+#
+#    analysis   run-once batch job. Cleans the raw CSV, runs all 8 tasks, and
+#               writes results/ (tables, figures, metrics, clean parquet).
+#               Exits on completion -- it is a job, not a server.
+#
+#    api        FastAPI recommendation service on :8000. Waits for `analysis`
+#               to finish so it can load the cleaned parquet rather than
+#               re-cleaning 245k rows on every container start.
+#
+#    dashboard  Streamlit dashboard on :8501. Same dependency.
+#
+#  Both services share ./results via a bind mount, so the analysis output is
+#  visible on the host and survives container restarts.
+#
+#  USAGE
+#    Place your raw CSV in the project root as jobs.csv, then:
+#
+#      docker compose up --build        # run everything
+#      docker compose up analysis       # analysis only
+#      docker compose logs -f api       # follow API logs
+#      docker compose down              # stop and remove
+#
+#    API docs:   http://localhost:8000/docs
+#    Dashboard:  http://localhost:8501
+# =============================================================================
+
+services:
+
+  analysis:
+    build: .
+    container_name: jobmarket-analysis
+    command: python job_market_analysis.py --data /app/data/jobs.csv --outdir /app/results
+    volumes:
+      - ./results:/app/results
+      - ./jobs.csv:/app/data/jobs.csv:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Batch job: run to completion, then stay stopped.
+    restart: "no"
+
+  api:
+    build: .
+    container_name: jobmarket-api
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./results:/app/results
+      - ./jobs.csv:/app/data/jobs.csv:ro
+    environment:
+      - DATA_DIR=/app/results
+      - RAW_CSV=/app/data/jobs.csv
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      analysis:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 10s
+      # The TF-IDF index builds at startup; allow time before probing.
+      start_period: 90s
+      retries: 3
+    restart: unless-stopped
+
+  dashboard:
+    build: .
+    container_name: jobmarket-dashboard
+    command: >
+      streamlit run dashboard.py
+      --server.port=8501
+      --server.address=0.0.0.0
+      --server.headless=true
+      --browser.gatherUsageStats=false
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./results:/app/results
+      - ./jobs.csv:/app/data/jobs.csv:ro
+    environment:
+      - DATA_DIR=/app/results
+      - RAW_CSV=/app/data/jobs.csv
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      analysis:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8501/_stcore/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+    restart: unless-stopped

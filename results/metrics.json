@@ -1,0 +1,24 @@
+{
+  "rows_raw": 244828,
+  "rows_clean": 244827,
+  "rows_ts_reliable": 240548,
+  "taxonomy_precision_overall": 0.8958,
+  "weekend_drop_pct": 32.0,
+  "task3_best_model": "SeasonalNaive (lag-7)",
+  "task3_best_mape": 1.6,
+  "task3_baseline_mape": 1.6,
+  "task3_beats_baseline": false,
+  "task4_global_median_hourly": 22.5,
+  "task4_kruskal_p": 0.0,
+  "task5_eval": {
+    "k": 10,
+    "n_queries": 400,
+    "precision@10": 0.6378,
+    "random_baseline": 0.0802,
+    "lift_vs_random": 7.95,
+    "MRR": 0.7568
+  },
+  "task6_pct_hourly_daily_std": 1.931,
+  "task7_hhi": 0.1917,
+  "task7_top5_concentration_pct": 66.3
+}

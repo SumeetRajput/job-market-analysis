@@ -1,0 +1,15 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+jobs.csv
+data/raw/
+results/jobs_clean.parquet
+*.db
+*.sqlite3
+analysis_log.txt
+*.log
+.vscode/
+.idea/
+Thumbs.db
+files.zip
